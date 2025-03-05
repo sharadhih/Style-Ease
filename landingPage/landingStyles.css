@@ -45,7 +45,7 @@ body {
 .hero {
     position: relative;
     width: 100%;
-    min-height: 55vh; /* Decreased height */
+    min-height: 55vh; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,7 +62,7 @@ body {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Slightly lighter overlay */
+    background: rgba(0, 0, 0, 0.3); 
     z-index: 1;
 }
 
@@ -72,7 +72,7 @@ body {
 }
 
 .hero h1 {
-    font-size: 2.5rem; /* Slightly smaller */
+    font-size: 2.5rem; 
     font-family: 'Playfair Display', serif;
     font-weight: bold;
     margin-bottom: 10px;
@@ -148,8 +148,8 @@ body {
 
 .category-card img {
     width: 100%;
-    height: 220px; /* Uniform height */
-    object-fit: cover; /* Prevents distortion */
+    height: 220px;
+    object-fit: cover; 
     border-radius: 10px;
 }
 
