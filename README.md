@@ -2,7 +2,7 @@
 
 A modern web application for clothing and fashion management built with React and Vite.
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 - React 1
 - Vite 6
