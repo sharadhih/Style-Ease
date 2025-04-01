@@ -2,27 +2,16 @@
 
 A modern web application for clothing and fashion management built with React and Vite.
 
-## 🚀 Features
-
-- Modern and responsive UI using Bootstrap 5
-- React Router for seamless navigation
-- Supabase integration for backend services
-- Lucide React icons for beautiful UI elements
-- ESLint configuration for code quality
-
 ## 🛠️ Tech Stack
 
-- React 19
+- React 1
 - Vite 6
 - Bootstrap 5
 - Supabase
-- React Router DOM
-- Axios
-- Lucide React
 
 ## 📋 Prerequisites
 
-Before you begin, ensure you have the following installed:
+Ensure you have the following installed:
 - Node.js (v14 or higher)
 - npm (v6 or higher)
 
@@ -50,7 +39,6 @@ cp .env.example .env
 
 ### Development Mode
 
-To start the development server:
 
 ```bash
 npm run dev
