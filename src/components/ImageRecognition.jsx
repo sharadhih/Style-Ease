@@ -1,14 +1,23 @@
-
 import React, { useState } from "react";
 import axios from "axios";
+import CategoryNav from "./CategoryNav";
 
 const ImageRecognition = () => {
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
+  const [previewUrl, setPreviewUrl] = useState(null);
 
   const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
+    const file = event.target.files[0];
+    setImage(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -22,16 +31,13 @@ const ImageRecognition = () => {
     formData.append("image", image);
 
     try {
-        const response = await axios.post('https://fashion4.p.rapidapi.com/v1/results', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'X-RapidAPI-Key': '5321039181msh039a416f8ef2404p116722jsncc14b8e64dce',
-            'X-RapidAPI-Host': 'fashion4.p.rapidapi.com',
-          },
-        }
-      );
-
-      console.log("API Response:", response.data); // Debugging step
+      const response = await axios.post('https://fashion4.p.rapidapi.com/v1/results', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'X-RapidAPI-Key': '5321039181msh039a416f8ef2404p116722jsncc14b8e64dce',
+          'X-RapidAPI-Host': 'fashion4.p.rapidapi.com',
+        },
+      });
 
       if (
         response.data.results &&
@@ -39,13 +45,16 @@ const ImageRecognition = () => {
         response.data.results[0].entities[0].classes
       ) {
         const allCategories = response.data.results[0].entities[0].classes;
+        
+        // Get the category with highest confidence
+        const highestConfidenceCategory = Object.entries(allCategories)
+          .sort(([, a], [, b]) => b - a)[0];
 
-        // Filter categories with confidence > 50% (0.5 in decimal)
-        const filteredCategories = Object.entries(allCategories).filter(
-          ([, confidence]) => confidence > 0.5
-        );
-
-        setResult(filteredCategories);
+        if (highestConfidenceCategory && highestConfidenceCategory[1] > 0.5) {
+          setResult(highestConfidenceCategory);
+        } else {
+          setResult(null);
+        }
       } else {
         setResult(null);
       }
@@ -58,27 +67,77 @@ const ImageRecognition = () => {
   };
 
   return (
-    <div>
-      <h2>Upload an Image for Fashion Recognition</h2>
-      <input type="file" onChange={handleImageChange} />
-      <button onClick={handleSubmit}>Upload</button>
+    <div style={{ backgroundColor: "#FFEDFA", minHeight: "100vh", padding: "2rem" }}>
+      <CategoryNav />
+      <div className="container" style={{padding: "2rem"}}>
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <div className="card shadow-lg" style={{ borderRadius: "15px", border: "none" }}>
+              <div className="card-body p-5">
+                <h2 className="text-center mb-4">Fashion Image Recognition</h2>
+                
+                <div className="text-center mb-4">
+                  <input
+                    type="file"
+                    onChange={handleImageChange}
+                    accept="image/*"
+                    className="d-none"
+                    id="imageInput"
+                  />
+                  <label
+                    htmlFor="imageInput"
+                    className="btn btn-primary px-4 py-2"
+                    style={{ backgroundColor: "#ff66b2", border: "none" }}
+                  >
+                    Choose Image
+                  </label>
+                </div>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+                {previewUrl && (
+                  <div className="text-center mb-4">
+                    <img
+                      src={previewUrl}
+                      alt="Preview"
+                      style={{ maxWidth: "100%", maxHeight: "300px", borderRadius: "10px" }}
+                    />
+                  </div>
+                )}
 
-      {result && result.length > 0 ? (
-        <div>
-          <h3>Detected Fashion Items :</h3>
-          <ul>
-            {result.map(([item, confidence], index) => (
-              <li key={index}>
-                {item} - {(confidence * 100).toFixed(2)}%
-              </li>
-            ))}
-          </ul>
+                <div className="text-center">
+                  <button
+                    onClick={handleSubmit}
+                    className="btn btn-primary px-4 py-2"
+                    style={{ backgroundColor: "#ff66b2", border: "none" }}
+                    disabled={!image}
+                  >
+                    Analyze Image
+                  </button>
+                </div>
+
+                {error && (
+                  <div className="alert alert-danger mt-3" role="alert">
+                    {error}
+                  </div>
+                )}
+
+                {result && (
+                  <div className="mt-4 text-center">
+                    <h3>Detected Category:</h3>
+                    <div className="alert alert-success" role="alert">
+                      <h4 className="mb-0">
+                        {result[0].charAt(0).toUpperCase() + result[0].slice(1)}
+                      </h4>
+                      <p className="mb-0">
+                        Confidence: {(result[1] * 100).toFixed(2)}%
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      ) : (
-        <p>No high-confidence categories detected.</p>
-      )}
+      </div>
     </div>
   );
 };
