@@ -25,7 +25,7 @@ const Home = () => {
       {/* Hero Banner Section */}
       <div className="hero-banner text-center w-100">
         <img 
-          src="/banner.jpeg" 
+          src="/banner.jpg" 
           alt="Fashion Banner" 
           className="img-fluid w-100"
           style={{ height: "50vh", objectFit: "cover" }}
