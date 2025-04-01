@@ -1,24 +1,19 @@
-import React from 'react';
+import "./ProductCard.css"; // ✅ Add a CSS file for styling
 
 const ProductCard = ({ product }) => {
   return (
     <div className="product-card">
-      <div className="product-image-container">
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className="product-image"
-        />
-      </div>
-      <div className="product-info">
-        <h3 className="product-name">{product.name}</h3>
-        <div className="product-details">
-          <span className="product-price">${product.price.toFixed(2)}</span>
-          <span className="product-type">
-            {product.type}
-          </span>
-        </div>
-      </div>
+      <img 
+        src={product.image} 
+        alt={product.name} 
+        onError={(e) => e.target.src = "https://via.placeholder.com/150"}
+      />
+      <h3>{product.name}</h3>
+      <p><strong>Style:</strong> {product.style}</p>
+      <p><strong>Color:</strong> {product.color}</p>
+      <p><strong>Fabric:</strong> {product.fabric}</p>
+      <p><strong>Origin:</strong> {product.origin}</p>
+      <p>{product.description}</p>
     </div>
   );
 };
