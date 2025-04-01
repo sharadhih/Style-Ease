@@ -14,7 +14,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="navbar navbar-dark bg-black px-4 py-3" style={{ width: "100vw" }}>
+    <nav className="navbar navbar-dark bg-black px-4 py-3" style={{ width: "100%" }}>
       <div className="container-fluid d-flex justify-content-between align-items-center">
         <a className="navbar-brand text-white fw-bold" href="/">Style-Ease</a>
         <form className="d-flex justify-content-center w-50" onSubmit={handleSearch}>

@@ -21,14 +21,14 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{ backgroundColor: "#FFEDFA", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <div style={{ backgroundColor: "#FFEDFA", minHeight: "100vh", display: "flex", flexDirection: "column", overflowX: "hidden" }}>
       {/* Hero Banner Section */}
-      <div className="hero-banner text-center">
+      <div className="hero-banner text-center w-100">
         <img 
           src="/banner.jpeg" 
           alt="Fashion Banner" 
-          className="img-fluid"
-          style={{ width: "100vw", height: "50vh", objectFit: "cover" }}
+          className="img-fluid w-100"
+          style={{ height: "50vh", objectFit: "cover" }}
         />
       </div>
 
@@ -47,7 +47,7 @@ const Home = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-black text-white text-center py-3" style={{ fontSize: "12px" }}>
+      <footer className="bg-black text-white text-center py-3 w-100" style={{ fontSize: "12px" }}>
         Created with ❤️ | © {new Date().getFullYear()} Style-Ease. All Rights Reserved.
       </footer>
     </div>

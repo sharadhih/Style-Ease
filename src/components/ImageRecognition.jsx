@@ -34,8 +34,8 @@ const ImageRecognition = () => {
       const response = await axios.post('https://fashion4.p.rapidapi.com/v1/results', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'X-RapidAPI-Key': '5321039181msh039a416f8ef2404p116722jsncc14b8e64dce',
-          'X-RapidAPI-Host': 'fashion4.p.rapidapi.com',
+          'X-RapidAPI-Key': import.meta.env.VITE_RAPIDAPI_KEY,
+          'X-RapidAPI-Host': import.meta.env.VITE_RAPIDAPI_HOST,
         },
       });
 
