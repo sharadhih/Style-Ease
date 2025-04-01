@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ImageRecognition from './components/ImageRecognition';
 import Home from './components/Home';
 import Products from './components/Products';
-import Traditional from './components/traditional';
-import Western from './components/western';
+import Traditional from './components/Traditional';
+import Western from './components/Western';
 import Navigation from './components/Navigation';
 import ProductDetail from './components/ProductDetail';
 
