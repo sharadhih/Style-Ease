@@ -5,7 +5,6 @@ import Home from './components/Home';
 import Products from './components/Products';
 import Traditional from './components/traditional';
 import Western from './components/western';
-import AllCategories from './components/allCategories';
 import Navigation from './components/Navigation';
 import ProductDetail from './components/ProductDetail';
 
